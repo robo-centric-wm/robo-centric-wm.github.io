@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pre-Training Robo-Centric World Models For Efficient Visual Control</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <!--  <link rel="icon" href="./static/images/favicon.svg">-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">Pre-Training Robo-Centric World Models For Efficient Visual
+                        Control</h1>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!--               PDF Link.-->
+                            <span class="link-block">
+                <a href="https://github.com/robo-centric-wm/robo-centric-world-model"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+                            <!-- Code Link. -->
+                            <span class="link-block">
+                <a href="https://github.com/robo-centric-wm/robo-centric-world-model"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <img src="./static/my_img/model.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+
+            <!--      <video id="teaser" autoplay muted loop playsinline height="100%">-->
+            <!--        <source src="./static/videos/pretrain.mp4"-->
+            <!--                type="video/mp4">-->
+            <!--      </video>-->
+            <!--      <h2 class="subtitle has-text-centered">-->
+            <!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
+            <!--        free-viewpoint-->
+            <!--        portraits.-->
+            <!--      </h2>-->
+        </div>
+    </div>
+</section>
+
+
+<!--abstract-->
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    Model-based reinforcement learning has the potential to efficiently solve visual robot control tasks
+                    but remains limited by model errors. Current approaches desire to further improve the sample
+                    efficiency by pretraining world models. However, these methods typically focus on learning efficient
+                    visual representations rather than accurate dynamic predictions. In this paper, we introduce
+                    Robo-Centric World Models (RCWM), which decouple the dynamics of the robot and the environment
+                    separately, and preserve the robot dynamics branch during downstream task fine-tuning to improve
+                    robot dynamics prediction accuracy. Specifically, we utilize the structured prior robot mask in the
+                    pre-training phase to guide the decoupling of the dynamics and capture the effect of the robot's
+                    motion on the environment through the attention mechanism. Moreover, we further explore the
+                    advantages of RCWM in the few-shot setting. With RCWM, we can use a few demonstrations to obtain a
+                    robust initial policy without interacting with the environment. Our results in the Meta-world
+                    environment demonstrate that pre-trained RCWM can effectively capture robot dynamics and improve
+                    sample efficiency for downstream tasks.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--method-->
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Method</h2>
+                <div class="content has-text-justified">
+
+
+                </div>
+            </div>
+        </div>
+        <div class="hero-body">
+            <img src="./static/my_img/pipeline.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+
+        </div>
+    </div>
+</section>
+
+<!--results-->
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Results</h2>
+                <div class="content has-text-justified">
+
+
+                </div>
+            </div>
+        </div>
+        <div class="hero-body">
+            <img src="./static/my_img/results.PNG"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+        </div>
+
+        <!--visualize-->
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h3 class="title is-4">Robot Dynamics Extraction</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        We can also animate the scene by interpolating the deformation latent codes of two input
+                        frames. Use the slider here to linearly interpolate between the left frame and the right
+                        frame.
+                    </p>
+                </div>
+                <div class="content has-text-centered">
+                    <img src="./static/my_img/robot-dynamics-error-4.gif" alt="gif" width=80%>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h3 class="title is-4">Robot-Object Interaction</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        We can also animate the scene by interpolating the deformation latent codes of two input
+                        frames. Use the slider here to linearly interpolate between the left frame and the right
+                        frame.
+                    </p>
+                </div>
+                <div class="content has-text-centered">
+                    <img src="./static/my_img/interaction.gif" alt="gif" width=80%>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="columns is-centered has-text-centered">
+                    <p>
+                        Website based on <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
