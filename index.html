@@ -79,22 +79,28 @@
     </div>
 </section>
 
+
+<!--pipeline-->
 <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
-            <img src="./static/my_img/model.png"
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-4">Robo-Centric World Model</h2>
+
+            </div>
+            <img src="./static/img/model.png"
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
 
-            <!--      <video id="teaser" autoplay muted loop playsinline height="100%">-->
-            <!--        <source src="./static/videos/pretrain.mp4"-->
-            <!--                type="video/mp4">-->
-            <!--      </video>-->
-            <!--      <h2 class="subtitle has-text-centered">-->
-            <!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
-            <!--        free-viewpoint-->
-            <!--        portraits.-->
-            <!--      </h2>-->
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./static/video/pipeline.mp4"
+                        type="video/mp4">
+                <!--      </video>-->
+                <!--      <h2 class="subtitle has-text-centered">-->
+                <!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
+                <!--        free-viewpoint-->
+                <!--        portraits.-->
+                <!--      </h2>-->
         </div>
     </div>
 </section>
@@ -109,19 +115,20 @@
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Abstract</h2>
                 <div class="content has-text-justified">
-                    Model-based reinforcement learning has the potential to efficiently solve visual robot control tasks
-                    but remains limited by model errors. Current approaches desire to further improve the sample
-                    efficiency by pretraining world models. However, these methods typically focus on learning efficient
-                    visual representations rather than accurate dynamic predictions. In this paper, we introduce
-                    Robo-Centric World Models (RCWM), which decouple the dynamics of the robot and the environment
-                    separately, and preserve the robot dynamics branch during downstream task fine-tuning to improve
-                    robot dynamics prediction accuracy. Specifically, we utilize the structured prior robot mask in the
-                    pre-training phase to guide the decoupling of the dynamics and capture the effect of the robot's
-                    motion on the environment through the attention mechanism. Moreover, we further explore the
-                    advantages of RCWM in the few-shot setting. With RCWM, we can use a few demonstrations to obtain a
-                    robust initial policy without interacting with the environment. Our results in the Meta-world
-                    environment demonstrate that pre-trained RCWM can effectively capture robot dynamics and improve
-                    sample efficiency for downstream tasks.
+                    Humans can accurately anticipate their movements to behave as expected during manipulation tasks. We
+                    are inspired to propose that integrating prior knowledge of robot dynamics into world models can
+                    effectively improve the sample efficiency of model-based reinforcement learning (MBRL) in visual
+                    robot control tasks. In this paper, we introduce the Robo-Centric World Model (RCWM), which is
+                    designed to decouple the dynamics of the robot from the environment and learn their interaction
+                    through a cross-attention mechanism. Specifically, we leverage prior robot masks in the pre-training
+                    phase to decouple robot dynamics and apply this knowledge to downstream tasks. Our approach enables
+                    the independent inference of robot dynamics from the environment, allowing for accurate dynamics
+                    predictions across a variety of tasks. In addition, we explore the advantages of the pre-trained
+                    RCWM by combining imitation learning and model-based reinforcement learning with a few expert
+                    trajectories, allowing us to learn an adequate policy and further accelerate subsequent online
+                    fine-tuning. Our results in Meta-world show that RCWM can effectively extract robot dynamics and
+                    significantly improve sample efficiency for downstream tasks compared to the vanilla world model in
+                    DreamerV3.
                 </div>
             </div>
         </div>
@@ -130,6 +137,8 @@
 
 
 <!--method-->
+
+
 <section class="section">
     <div class="container is-max-desktop">
         <!-- Abstract. -->
@@ -137,13 +146,20 @@
             <div class="column is-full-width">
                 <h2 class="title is-3">Method</h2>
                 <div class="content has-text-justified">
-
+                    we introduce the Robo-Centric World Model (RCWM), which can decouple the dynamics
+                    between the robot and the environment, and learn their interaction via an interaction model based on
+                    the cross-attention mechanism. With RCWM, we can extract robot dynamics through pre-training on
+                    upstream tasks with the assistance of prior robot masks, and use this prior knowledge about robot to
+                    improve sample efficiency on downstream tasks. Furthermore, we proposed few-shot expert-guided
+                    policy learning, which combines model-based reinforcement learning with behavioral cloning. This
+                    approach aims to learn an adequate policy from just a few expert trajectories to further accelerate
+                    subsequent online fine-tuning.
 
                 </div>
             </div>
         </div>
         <div class="hero-body">
-            <img src="./static/my_img/pipeline.png"
+            <img src="./static/img/pipeline.png"
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
 
@@ -154,21 +170,57 @@
 <!--results-->
 <section class="section">
     <div class="container is-max-desktop">
-        <!-- Abstract. -->
         <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
                 <h2 class="title is-3">Results</h2>
+            </div>
+        </div>
+
+        <!--        <div class="hero-body">-->
+        <!--            <img src="./static/img/results.PNG"-->
+        <!--                 class="interpolation-image"-->
+        <!--                 alt="Interpolate start reference image."/>-->
+        <!--        </div>-->
+        <!--Sample efficiency improvement-->
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h3 class="title is-4">Sample Efficiency Improvement</h3>
                 <div class="content has-text-justified">
-
-
+                    <p>
+                        Compared to the vanilla world model in Dreamerv3, the pre-trained RCWM can utilize the extracted
+                        prior knowledge of robot dynamics to further improve the sample efficiency of downstream tasks.
+                    </p>
+                </div>
+                <div class="content has-text-centered">
+                    <img src="./static/img/results.PNG"
+                         class="interpolation-image"
+                         alt="Interpolate start reference image."/>
                 </div>
             </div>
         </div>
-        <div class="hero-body">
-            <img src="./static/my_img/results.PNG"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
+
+        <!--Few-shot Expert-guided Policy Learning-->
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h3 class="title is-4">Few-shot Expert-guided Policy Learning</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        With extracted robot dynamics, the pre-trained RCWM can provide effective representations and
+                        predictions by fine-tuning on just 50 expert trajectories. The actor can be trained by combining
+                        behavioral cloning with
+                        model-based reinforcement learning to learn an adequate policy that can further accelerate
+                        subsequent
+                        online fine-tuning.
+                    </p>
+                </div>
+                <div class="content has-text-centered">
+                    <img src="./static/img/few-shot.PNG"
+                         class="interpolation-image"
+                         alt="Interpolate start reference image."/>
+                </div>
+            </div>
         </div>
+
 
         <!--visualize-->
         <div class="columns is-centered">
@@ -176,13 +228,15 @@
                 <h3 class="title is-4">Robot Dynamics Extraction</h3>
                 <div class="content has-text-justified">
                     <p>
-                        We can also animate the scene by interpolating the deformation latent codes of two input
-                        frames. Use the slider here to linearly interpolate between the left frame and the right
-                        frame.
+                        The pre-trained RCWM can consistently deliver accurate predictions of robot movements in
+                        response to action signals when applied on unseen downstream tasks. Even when environmental
+                        observations are replaced with random noise, the robot branch can make accurate predictions
+                        almost unaffectedly.
                     </p>
                 </div>
                 <div class="content has-text-centered">
-                    <img src="./static/my_img/robot-dynamics-error-4.gif" alt="gif" width=80%>
+                    <img src="./static/img/robot-dynamics-error.gif" alt="gif" width=80%>
+                    <img src="./static/img/robot-dynamics-error-noisy.gif" alt="gif" width=80%>
                 </div>
             </div>
         </div>
@@ -192,13 +246,15 @@
                 <h3 class="title is-4">Robot-Object Interaction</h3>
                 <div class="content has-text-justified">
                     <p>
-                        We can also animate the scene by interpolating the deformation latent codes of two input
-                        frames. Use the slider here to linearly interpolate between the left frame and the right
-                        frame.
+                        The interaction model in RCWM can effectively utilize the cross-attention mechanism to capture
+                        how the predicted movement of the robot will impact the state of the environment. The
+                        environment branch can accurately generate predictions that align with the robot movement predicted by the robot
+                        branch.
                     </p>
                 </div>
                 <div class="content has-text-centered">
-                    <img src="./static/my_img/interaction.gif" alt="gif" width=80%>
+                    <img src="./static/img/interaction-1-web.gif" alt="gif" width=80%>
+                    <img src="./static/img/interaction-2-web.gif" alt="gif" width=80%>
                 </div>
             </div>
         </div>
