@@ -37,8 +37,47 @@
     <script src="./static/js/bulma-carousel.min.js"></script>
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
+
+    <style>
+        .image-container {
+            position: relative;
+            width: 900px; /* 宽度根据需要调整 */
+            height: auto; /* 高度根据需要调整 */
+            overflow: hidden; /* 隐藏超出部分 */
+            margin: 20px auto; /* 居中 */
+        }
+
+        img {
+            width: 100%; /* 图片自适应容器 */
+            height: auto; /* 保持宽高比 */
+        }
+
+
+        .arrow {
+            position: absolute; /* 保持绝对定位 */
+            top: 50%; /* 垂直居中 */
+            transform: translateY(-50%); /* 调整位置至中心 */
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .left-arrow {
+            left: 10px; /* 左侧箭头位置 */
+        }
+
+        .right-arrow {
+            right: 10px; /* 右侧箭头位置 */
+        }
+    </style>
+
 </head>
 <body>
+
 
 <section class="hero">
     <div class="hero-body">
@@ -88,19 +127,19 @@
                 <h2 class="title is-4">Robo-Centric World Model</h2>
 
             </div>
-            <img src="./static/img/model.png"
+            <img src="./static/imgs/model.png"
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
 
-            <video id="teaser" autoplay muted loop playsinline height="100%">
-                <source src="./static/video/pipeline.mp4"
-                        type="video/mp4">
-                <!--      </video>-->
-                <!--      <h2 class="subtitle has-text-centered">-->
-                <!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
-                <!--        free-viewpoint-->
-                <!--        portraits.-->
-                <!--      </h2>-->
+            <!--            <video id="teaser" autoplay muted loop playsinline height="100%">-->
+            <!--                <source src="./static/video/pipeline.mp4"-->
+            <!--                        type="video/mp4">-->
+            <!--      </video>-->
+            <!--      <h2 class="subtitle has-text-centered">-->
+            <!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
+            <!--        free-viewpoint-->
+            <!--        portraits.-->
+            <!--      </h2>-->
         </div>
     </div>
 </section>
@@ -115,20 +154,21 @@
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Abstract</h2>
                 <div class="content has-text-justified">
-                    Humans can accurately anticipate their movements to behave as expected during manipulation tasks. We
-                    are inspired to propose that integrating prior knowledge of robot dynamics into world models can
-                    effectively improve the sample efficiency of model-based reinforcement learning (MBRL) in visual
-                    robot control tasks. In this paper, we introduce the Robo-Centric World Model (RCWM), which is
-                    designed to decouple the dynamics of the robot from the environment and learn their interaction
-                    through a cross-attention mechanism. Specifically, we leverage prior robot masks in the pre-training
-                    phase to decouple robot dynamics and apply this knowledge to downstream tasks. Our approach enables
-                    the independent inference of robot dynamics from the environment, allowing for accurate dynamics
-                    predictions across a variety of tasks. In addition, we explore the advantages of the pre-trained
-                    RCWM by combining imitation learning and model-based reinforcement learning with a few expert
-                    trajectories, allowing us to learn an adequate policy and further accelerate subsequent online
-                    fine-tuning. Our results in Meta-world show that RCWM can effectively extract robot dynamics and
-                    significantly improve sample efficiency for downstream tasks compared to the vanilla world model in
-                    DreamerV3.
+                    Humans can accurately anticipate their movements to behave as expected in various manipulation
+                    tasks. We are inspired to propose that integrating prior knowledge of robot dynamics into world
+                    models can effectively improve the sample efficiency of model-based reinforcement learning (MBRL) in
+                    visual robot control tasks. In this paper, we introduce the Robo-Centric World Model (RCWM), which
+                    explicitly decouples the robot dynamics from the environment and enables pre-training to learn
+                    generalized and robust robot dynamics as prior knowledge to accelerate learning new tasks.
+                    Specifically, we construct respective dynamics models for the robot and the environment and learn
+                    their interactions through cross-attention mechanism. With the mask-guided reconfiguration
+                    mechanism, we only need a few prior robot segmentation masks to guide the RCWM to disentangle the
+                    robot and environment features and learn their respective dynamics. Our approach enables independent
+                    inference of robot dynamics from the environment, allowing accurate prediction of robot movement
+                    across various unseen tasks without being distracted by environmental variations. Our results in
+                    Meta-world demonstrate that RCWM is able to efficiently learn robot dynamics, improving sample
+                    efficiency for downstream tasks and enhancing policy robustness against environmental disturbances
+                    compared to the vanilla world model in DreamerV3.
                 </div>
             </div>
         </div>
@@ -150,16 +190,19 @@
                     between the robot and the environment, and learn their interaction via an interaction model based on
                     the cross-attention mechanism. With RCWM, we can extract robot dynamics through pre-training on
                     upstream tasks with the assistance of prior robot masks, and use this prior knowledge about robot to
-                    improve sample efficiency on downstream tasks. Furthermore, we proposed few-shot expert-guided
-                    policy learning, which combines model-based reinforcement learning with behavioral cloning. This
-                    approach aims to learn an adequate policy from just a few expert trajectories to further accelerate
-                    subsequent online fine-tuning.
+                    improve sample efficiency on downstream tasks. RCWM offers several advantages: (1) Accurate
+                    prediction of robot dynamics. We find that explicitly modeling robot dynamics individually results
+                    in more accurate predictions compared to learning global dynamics with a single model; (2) Robust
+                    against environmental disturbance. Due to implicit feature disentanglement, the robot branch is
+                    hardly affected by environmental disturbances, providing robust robot representation for the policy;
+                    (3) Utilization of prior masks. The architecture of RCWM naturally introduces the use of robot
+                    segmentation masks, which can enhance the prediction accuracy of robot dynamics.
 
                 </div>
             </div>
         </div>
         <div class="hero-body">
-            <img src="./static/img/pipeline.png"
+            <img src="./static/imgs/pipeline.png"
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
 
@@ -192,29 +235,25 @@
                     </p>
                 </div>
                 <div class="content has-text-centered">
-                    <img src="./static/img/results.PNG"
+                    <img src="./static/imgs/results.png"
                          class="interpolation-image"
                          alt="Interpolate start reference image."/>
                 </div>
             </div>
         </div>
 
-        <!--Few-shot Expert-guided Policy Learning-->
+        <!--        Few-shot Expert-guided Policy Learning-->
         <div class="columns is-centered">
             <div class="column is-full-width">
-                <h3 class="title is-4">Few-shot Expert-guided Policy Learning</h3>
+                <h3 class="title is-4">Robustness Against Environmental Disturbances</h3>
                 <div class="content has-text-justified">
                     <p>
-                        With extracted robot dynamics, the pre-trained RCWM can provide effective representations and
-                        predictions by fine-tuning on just 50 expert trajectories. The actor can be trained by combining
-                        behavioral cloning with
-                        model-based reinforcement learning to learn an adequate policy that can further accelerate
-                        subsequent
-                        online fine-tuning.
+                        In the face of disturbances caused by changes in the environment, RCWM is more robust than
+                        vanilla world model and can provide accurate robot state representations for the policy.
                     </p>
                 </div>
                 <div class="content has-text-centered">
-                    <img src="./static/img/few-shot.PNG"
+                    <img src="./static/imgs/disturbances.png"
                          class="interpolation-image"
                          alt="Interpolate start reference image."/>
                 </div>
@@ -223,41 +262,112 @@
 
 
         <!--visualize-->
+
+
         <div class="columns is-centered">
             <div class="column is-full-width">
-                <h3 class="title is-4">Robot Dynamics Extraction</h3>
+                <h3 class="title is-4">Robot Dynamics Learning</h3>
                 <div class="content has-text-justified">
                     <p>
                         The pre-trained RCWM can consistently deliver accurate predictions of robot movements in
-                        response to action signals when applied on unseen downstream tasks. Even when environmental
+                        response to actions when applied on unseen downstream tasks. Even when environmental
                         observations are replaced with random noise, the robot branch can make accurate predictions
                         almost unaffectedly.
                     </p>
                 </div>
-                <div class="content has-text-centered">
-                    <img src="./static/img/robot-dynamics-error.gif" alt="gif" width=80%>
-                    <img src="./static/img/robot-dynamics-error-noisy.gif" alt="gif" width=80%>
-                </div>
+                <!--                <div class="content has-text-centered">-->
+                <!--                    &lt;!&ndash;                <div class="scrollable-images">&ndash;&gt;-->
+                <!--                    <img src="./static/imgs/coffee-pull-dyn.gif" alt="gif 1" width=80%>-->
+                <!--                    <img src="./static/imgs/noise.gif" alt="gif 2" width=80%>-->
+                <!--                </div>-->
+                <!---->
+
+                <div class="image-container" id="robotDyn"></div>
+
+                <!--                <div class="image-container">-->
+                <!--                    <img id="gifImage" src="./static/imgs/coffee-pull-dyn.gif" alt="GIF">-->
+                <!--                    <button class="arrow left-arrow" onclick="prevImage()">❮</button>-->
+                <!--                    <button class="arrow right-arrow" onclick="nextImage()">❯</button>-->
+                <!--                </div>-->
+
+                <!--                <script>-->
+                <!--                    const images = ["./static/imgs/coffee-pull-dyn.gif", "./static/imgs/box-close-dyn.gif", "./static/imgs/hammer-dyn.gif", "./static/imgs/noise.gif"]; // 添加更多GIF-->
+                <!--                    let currentIndex = 0;-->
+
+                <!--                    function nextImage() {-->
+                <!--                        currentIndex = (currentIndex + 1) % images.length; // 循环切换-->
+                <!--                        document.getElementById("gifImage").src = images[currentIndex];-->
+                <!--                    }-->
+
+                <!--                    function prevImage() {-->
+                <!--                        currentIndex = (currentIndex - 1 + images.length) % images.length; // 循环切换-->
+                <!--                        document.getElementById("gifImage").src = images[currentIndex];-->
+                <!--                    }-->
+                <!--                </script>-->
+
+
             </div>
         </div>
 
         <div class="columns is-centered">
             <div class="column is-full-width">
-                <h3 class="title is-4">Robot-Object Interaction</h3>
+                <h3 class="title is-4">Robot-Object Interaction Learning</h3>
                 <div class="content has-text-justified">
                     <p>
                         The interaction model in RCWM can effectively utilize the cross-attention mechanism to capture
-                        how the predicted movement of the robot will impact the state of the environment. The
-                        environment branch can accurately generate predictions that align with the robot movement predicted by the robot
-                        branch.
+                        how the predicted movement of the robot will effect the state of the environment. The
+                        environment branch can accurately generate predictions that align with the robot movement
+                        predicted by the robot branch.
                     </p>
                 </div>
-                <div class="content has-text-centered">
-                    <img src="./static/img/interaction-1-web.gif" alt="gif" width=80%>
-                    <img src="./static/img/interaction-2-web.gif" alt="gif" width=80%>
-                </div>
+                <!--                <div class="content has-text-centered">-->
+                <!--                    <img src="./static/imgs/door-open.gif" alt="gif" width=80%>-->
+                <!--                    <img src="./static/imgs/peg-insert-side.gif" alt="gif" width=80%>-->
+                <!--                </div>-->
+
+                <!--                <div class="image-container">-->
+                <!--                    <img id="gifInter" src="./static/imgs/door-open-interaction.gif" alt="GIF">-->
+                <!--                    <button class="arrow left-arrow" onclick="prevImage()">❮</button>-->
+                <!--                    <button class="arrow right-arrow" onclick="nextImage()">❯</button>-->
+                <!--                </div>-->
+
+                <div class="image-container" id="robotInteraction"></div>
+
+
             </div>
         </div>
+
+
+        <script>
+            function createImageSlider(containerId, images) {
+                let currentIndex = 0;
+
+                const container = document.getElementById(containerId);
+                container.innerHTML = `
+                <img id="${containerId}-gif" src="${images[0]}" alt="GIF">
+                <button class="arrow left-arrow">❮</button>
+                <button class="arrow right-arrow">❯</button>
+            `;
+
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    document.getElementById(`${containerId}-gif`).src = images[currentIndex];
+                }
+
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    document.getElementById(`${containerId}-gif`).src = images[currentIndex];
+                }
+
+                // 绑定事件
+                container.querySelector('.right-arrow').addEventListener('click', nextImage);
+                container.querySelector('.left-arrow').addEventListener('click', prevImage);
+            }
+
+            // 初始化每个区域
+            createImageSlider('robotDyn', ["./static/imgs/coffee-pull-dyn.gif", "./static/imgs/box-close-dyn.gif", "./static/imgs/hammer-dyn.gif", "./static/imgs/noise.gif"]);
+            createImageSlider('robotInteraction', ["./static/imgs/door-open-interaction.gif", "./static/imgs/peg-insert-side-interaction.gif", "./static/imgs/hammer-interaction.gif", "./static/imgs/box-close-interaction.gif"]);
+        </script>
 
     </div>
 </section>
